@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Photography index{% endblock %}
+
+{% block body %}
+    <h1>Photography index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>TextualAlternative</th>
+                <th>Picture</th>
+                <th>Thumbnail</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for photography in photographies %}
+            <tr>
+                <td>{{ photography.id }}</td>
+                <td>{{ photography.title }}</td>
+                <td>{{ photography.description }}</td>
+                <td>{{ photography.textualAlternative }}</td>
+                <td>{{ photography.picture }}</td>
+                <td>{{ photography.thumbnail }}</td>
+                <td>{{ photography.createdAt ? photography.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ photography.updatedAt ? photography.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('photography_show', {'id': photography.id}) }}">show</a>
+                    <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('photography_new') }}">Create new</a>
+{% endblock %}

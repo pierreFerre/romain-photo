@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Photography{% endblock %}
+
+{% block body %}
+    <h1>Photography</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ photography.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ photography.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ photography.description }}</td>
+            </tr>
+            <tr>
+                <th>TextualAlternative</th>
+                <td>{{ photography.textualAlternative }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ photography.picture }}</td>
+            </tr>
+            <tr>
+                <th>Thumbnail</th>
+                <td>{{ photography.thumbnail }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ photography.createdAt ? photography.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ photography.updatedAt ? photography.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('photography_index') }}">back to list</a>
+
+    <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
+
+    {{ include('photography/_delete_form.html.twig') }}
+{% endblock %}
