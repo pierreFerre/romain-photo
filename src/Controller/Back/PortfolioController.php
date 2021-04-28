@@ -10,9 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/portfolio")
- */
+
 class PortfolioController extends AbstractController
 {
     /**
@@ -20,7 +18,7 @@ class PortfolioController extends AbstractController
      */
     public function index(PortfolioRepository $portfolioRepository): Response
     {
-        return $this->render('portfolio/index.html.twig', [
+        return $this->render('back/portfolio/index.html.twig', [
             'portfolios' => $portfolioRepository->findAll(),
         ]);
     }
