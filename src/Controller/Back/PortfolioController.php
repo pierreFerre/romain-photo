@@ -17,7 +17,7 @@ class PortfolioController extends AbstractController
      * @Route("/", name="portfolio_index", methods={"GET"})
      */
     public function index(PortfolioRepository $portfolioRepository): Response
-    {
+    {        
         return $this->render('back/portfolio/index.html.twig', [
             'portfolios' => $portfolioRepository->findAll(),
         ]);
