@@ -20,7 +20,7 @@ class PhotographyController extends AbstractController
      */
     public function index(PhotographyRepository $photographyRepository): Response
     {
-        return $this->render('photography/index.html.twig', [
+        return $this->render('back/photography/index.html.twig', [
             'photographies' => $photographyRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class PhotographyController extends AbstractController
             return $this->redirectToRoute('photography_index');
         }
 
-        return $this->render('photography/new.html.twig', [
+        return $this->render('back/photography/new.html.twig', [
             'photography' => $photography,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class PhotographyController extends AbstractController
      */
     public function show(Photography $photography): Response
     {
-        return $this->render('photography/show.html.twig', [
+        return $this->render('back/photography/show.html.twig', [
             'photography' => $photography,
         ]);
     }
@@ -72,7 +72,7 @@ class PhotographyController extends AbstractController
             return $this->redirectToRoute('photography_index');
         }
 
-        return $this->render('photography/edit.html.twig', [
+        return $this->render('back/photography/edit.html.twig', [
             'photography' => $photography,
             'form' => $form->createView(),
         ]);
