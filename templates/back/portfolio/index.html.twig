@@ -5,6 +5,13 @@
 {% block body %}
     <h1>Les collections</h1>
 
+    {% for portfolio in portfolios %}
+        <div>
+            <a href="{{ path('portfolio_show', {'id': portfolio.id})}}">{# <img src="{{ asset(portfolio.picture) }}"> #} {{ portfolio.name }}</a>
+            <a href="{{ path('portfolio_show', {'id': portfolio.id}) }}">show</a>
+            <a href="{{ path('portfolio_edit', {'id': portfolio.id}) }}">edit</a>
+        </div>
+    {% endfor %}
     
     <table class="table">
         <thead>

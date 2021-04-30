@@ -5,6 +5,12 @@
 {% block body %}
     <h1>Photography index</h1>
 
+    {% for photography in photographies %}
+        <a href="{{ path('portfolio_show', {'id': photography.id})}}"><img src="{{ asset(photography.picture) }}"> {{ photography.title }}</a>
+        <a href="{{ path('photography_show', {'id': photography.id}) }}">show</a>
+        <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
+    {% endfor %}
+
     <table class="table">
         <thead>
             <tr>

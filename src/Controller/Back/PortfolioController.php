@@ -4,11 +4,12 @@ namespace App\Controller\Back;
 
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
+use App\Service\FileUploader;
 use App\Repository\PortfolioRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class PortfolioController extends AbstractController
@@ -26,7 +27,7 @@ class PortfolioController extends AbstractController
     /**
      * @Route("/new", name="portfolio_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $portfolio = new Portfolio();
         $form = $this->createForm(PortfolioType::class, $portfolio);
@@ -34,6 +35,14 @@ class PortfolioController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            // Handling the picture
+            $picture = $form->get('picture')->getData();
+            // If a picture has been send
+            if ($picture) {
+                $newPicture = $fileUploader->upload($picture);
+                $portfolio->setPicture($newPicture);
+            }
+
             $entityManager->persist($portfolio);
             $entityManager->flush();
 
