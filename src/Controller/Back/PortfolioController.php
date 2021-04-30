@@ -46,6 +46,11 @@ class PortfolioController extends AbstractController
             $entityManager->persist($portfolio);
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'Création du portfolio "' . $portfolio->getName() . '" effectuée.'
+            );
+
             return $this->redirectToRoute('portfolio_index');
         }
 
@@ -68,13 +73,27 @@ class PortfolioController extends AbstractController
     /**
      * @Route("/{id}/edit", name="portfolio_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Portfolio $portfolio): Response
+    public function edit(Request $request, Portfolio $portfolio, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(PortfolioType::class, $portfolio);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Handling the picture
+            $picture = $form->get('picture')->getData();
+            // If a picture has been send
+            if ($picture) {
+                $newPicture = $fileUploader->upload($picture);
+                $portfolio->setPicture($newPicture);
+            }
+
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'success',
+                'Modification du portfolio "' . $portfolio->getName() . '" enregistrée.'
+            );
 
             return $this->redirectToRoute('portfolio_index');
         }
@@ -94,6 +113,11 @@ class PortfolioController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($portfolio);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Suppression du portfolio "' . $portfolio->getName() . '" effectuée.'
+            );
         }
 
         return $this->redirectToRoute('portfolio_index');
