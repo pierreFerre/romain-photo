@@ -27,7 +27,7 @@ class PortfolioType extends AbstractType
                 $form = $event->getForm();
 
                 // If $portfolio is null, it's an adding action and the picture field is required
-                if ($portfolio->getId()) {
+                if ($portfolio->getId() === null) {
                     $form->add('picture', FileType::class, [
                         'label' => 'Photo',
                         'mapped' => false,

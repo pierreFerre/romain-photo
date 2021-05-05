@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 use App\Entity\Portfolio;
 use App\Form\PortfolioType;
+use App\Repository\PhotographyRepository;
 use App\Service\FileUploader;
 use App\Repository\PortfolioRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +20,7 @@ class PortfolioController extends AbstractController
      */
     public function index(PortfolioRepository $portfolioRepository): Response
     {        
+        // dd($portfolioRepository->findAll());
         return $this->render('back/portfolio/index.html.twig', [
             'portfolios' => $portfolioRepository->findAll(),
         ]);
@@ -63,10 +65,13 @@ class PortfolioController extends AbstractController
     /**
      * @Route("/{id}", name="portfolio_show", methods={"GET"})
      */
-    public function show(Portfolio $portfolio): Response
+    public function show(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
     {
+        $photographies = $photographyRepository->findBy(['portfolio' => $portfolio]);
+        // dd($photographies);
         return $this->render('back/portfolio/show.html.twig', [
             'portfolio' => $portfolio,
+            'photographies' => $photographies,
         ]);
     }
 

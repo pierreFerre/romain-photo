@@ -6,9 +6,21 @@
     <h1>Photography index</h1>
 
     {% for photography in photographies %}
-        <a href="{{ path('portfolio_show', {'id': photography.id})}}"><img src="{{ asset(photography.picture) }}"> {{ photography.title }}</a>
-        <a href="{{ path('photography_show', {'id': photography.id}) }}">show</a>
-        <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ asset(photography.picture) }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ photography.title }}</h5>
+                <p class="card-text">{{ photography.description }}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="{{ path('photography_show', {'id': photography.id}) }}">show</a>
+                <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
+            </div>
+        </div>
+        {# <div>
+            <a href="{{ path('photography_show', {'id': photography.id})}}"><img src="{{ asset(photography.picture) }}" class="picture-small"> {{ photography.title }}</a>
+            <a href="{{ path('photography_show', {'id': photography.id}) }}">show</a>
+            <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
+        </div> #}
     {% endfor %}
 
     <table class="table">
