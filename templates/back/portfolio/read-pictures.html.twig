@@ -1,0 +1,36 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block body %}
+    <h1>{{ portfolio.name }}</h1>
+    <div class="card mb-3">
+    <img src="{{ asset(portfolio.picture) }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ portfolio.name }}</h5>
+            <p class="card-text">{{ portfolio.description }}</p>
+            <p class="card-text"><small class="text-muted">Créé le {{ portfolio.createdAt ? portfolio.createdAt|date('Y-m-d H:i:s') : '' }}</small></p>
+            <a href="{{ path('portfolio_read', {'id': portfolio.id}) }}">Détail</a>
+            <a href="{{ path('portfolio_edit', {'id': portfolio.id}) }}">Modifier</a>
+        </div>
+    </div>
+
+    <div class="photography-card row">
+        {% for photography in photographies %}
+            <div class="card col-4 cards">
+                <img class="card-img-top" src="{{ asset(photography.picture) }}" alt="Card image cap">
+                <div class="card-body cards-body">
+                    <h5 class="card-title">{{ photography.title }}</h5>
+                    <p class="card-text">{{ photography.description }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{{ path('photography_read', {'id': photography.id}) }}">show</a>
+                    <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a class="btn btn-primary" href="{{ path('photography_add') }}">Ajouter une photographie</a>
+
+    {{ include('back/portfolio/_delete_form.html.twig') }}
+{% endblock %}

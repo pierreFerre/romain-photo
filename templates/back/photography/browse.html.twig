@@ -12,15 +12,10 @@
                 <h5 class="card-title">{{ photography.title }}</h5>
                 <p class="card-text">{{ photography.description }}</p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
-                <a href="{{ path('photography_show', {'id': photography.id}) }}">show</a>
+                <a href="{{ path('photography_read', {'id': photography.id}) }}">show</a>
                 <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
             </div>
         </div>
-        {# <div>
-            <a href="{{ path('photography_show', {'id': photography.id})}}"><img src="{{ asset(photography.picture) }}" class="picture-small"> {{ photography.title }}</a>
-            <a href="{{ path('photography_show', {'id': photography.id}) }}">show</a>
-            <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
-        </div> #}
     {% endfor %}
 
     <table class="table">
@@ -49,7 +44,7 @@
                 <td>{{ photography.createdAt ? photography.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ photography.updatedAt ? photography.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('photography_show', {'id': photography.id}) }}">show</a>
+                    <a href="{{ path('photography_read', {'id': photography.id}) }}">show</a>
                     <a href="{{ path('photography_edit', {'id': photography.id}) }}">edit</a>
                 </td>
             </tr>
@@ -61,5 +56,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('photography_new') }}">Create new</a>
+    <a href="{{ path('photography_add') }}">Create new</a>
 {% endblock %}

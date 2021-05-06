@@ -16,20 +16,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PortfolioController extends AbstractController
 {
     /**
-     * @Route("/", name="portfolio_index", methods={"GET"})
+     * Read all
+     * @Route("/", name="portfolio_browse", methods={"GET"})
      */
-    public function index(PortfolioRepository $portfolioRepository): Response
+    public function browse(PortfolioRepository $portfolioRepository): Response
     {        
         // dd($portfolioRepository->findAll());
-        return $this->render('back/portfolio/index.html.twig', [
+        return $this->render('back/portfolio/browse.html.twig', [
             'portfolios' => $portfolioRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="portfolio_new", methods={"GET","POST"})
+     * @Route("/new", name="portfolio_add", methods={"GET","POST"})
      */
-    public function new(Request $request, FileUploader $fileUploader): Response
+    public function add(Request $request, FileUploader $fileUploader): Response
     {
         $portfolio = new Portfolio();
         $form = $this->createForm(PortfolioType::class, $portfolio);
@@ -53,23 +54,36 @@ class PortfolioController extends AbstractController
                 'Création du portfolio "' . $portfolio->getName() . '" effectuée.'
             );
 
-            return $this->redirectToRoute('portfolio_index');
+            return $this->redirectToRoute('portfolio_browse');
         }
 
-        return $this->render('back/portfolio/new.html.twig', [
+        return $this->render('back/portfolio/add.html.twig', [
             'portfolio' => $portfolio,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="portfolio_show", methods={"GET"})
+     * @Route("/{id}", name="portfolio_read", methods={"GET"})
      */
-    public function show(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
+    public function read(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
     {
         $photographies = $photographyRepository->findBy(['portfolio' => $portfolio]);
         // dd($photographies);
-        return $this->render('back/portfolio/show.html.twig', [
+        return $this->render('back/portfolio/read.html.twig', [
+            'portfolio' => $portfolio,
+            'photographies' => $photographies,
+        ]);
+    }
+
+    /**
+     * @Route("/see/{id}", name="portfolio_read_pictures", methods={"GET"})
+     */
+    public function readPictures(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
+    {
+        $photographies = $photographyRepository->findBy(['portfolio' => $portfolio]);
+        // dd($photographies);
+        return $this->render('back/portfolio/read-pictures.html.twig', [
             'portfolio' => $portfolio,
             'photographies' => $photographies,
         ]);
@@ -100,7 +114,7 @@ class PortfolioController extends AbstractController
                 'Modification du portfolio "' . $portfolio->getName() . '" enregistrée.'
             );
 
-            return $this->redirectToRoute('portfolio_index');
+            return $this->redirectToRoute('portfolio_browse');
         }
 
         return $this->render('back/portfolio/edit.html.twig', [
@@ -125,6 +139,6 @@ class PortfolioController extends AbstractController
             );
         }
 
-        return $this->redirectToRoute('portfolio_index');
+        return $this->redirectToRoute('portfolio_browse');
     }
 }

@@ -16,19 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class PhotographyController extends AbstractController
 {
     /**
-     * @Route("/", name="photography_index", methods={"GET"})
+     * @Route("/", name="photography_browse", methods={"GET"})
      */
-    public function index(PhotographyRepository $photographyRepository): Response
+    public function browse(PhotographyRepository $photographyRepository): Response
     {
-        return $this->render('back/photography/index.html.twig', [
+        return $this->render('back/photography/browse.html.twig', [
             'photographies' => $photographyRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="photography_new", methods={"GET","POST"})
+     * @Route("/new", name="photography_add", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function add(Request $request): Response
     {
         $photography = new Photography();
         $form = $this->createForm(PhotographyType::class, $photography);
@@ -39,7 +39,7 @@ class PhotographyController extends AbstractController
             $entityManager->persist($photography);
             $entityManager->flush();
 
-            return $this->redirectToRoute('photography_index');
+            return $this->redirectToRoute('photography_browse');
         }
 
         return $this->render('back/photography/new.html.twig', [
@@ -49,11 +49,11 @@ class PhotographyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="photography_show", methods={"GET"})
+     * @Route("/{id}", name="photography_read", methods={"GET"})
      */
     public function show(Photography $photography): Response
     {
-        return $this->render('back/photography/show.html.twig', [
+        return $this->render('back/photography/read.html.twig', [
             'photography' => $photography,
         ]);
     }
@@ -69,7 +69,7 @@ class PhotographyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('photography_index');
+            return $this->redirectToRoute('photography_browse');
         }
 
         return $this->render('back/photography/edit.html.twig', [
@@ -89,6 +89,6 @@ class PhotographyController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('photography_index');
+        return $this->redirectToRoute('photography_browse');
     }
 }

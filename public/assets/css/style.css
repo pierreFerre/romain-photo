@@ -12,6 +12,20 @@
   justify-content: space-between;
 }
 
-.portfolio-body {
-  
+.cards-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.photography-card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cards {
+  margin-bottom: 1em;
+  border: 1px solid #00000047;
+  padding-top: 0.7em;
+  max-width: 30%;
 }
