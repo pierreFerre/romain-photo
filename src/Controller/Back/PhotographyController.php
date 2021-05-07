@@ -79,7 +79,7 @@ class PhotographyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="photography_delete", methods={"POST"})
+     * @Route("/{id}", name="photography_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Photography $photography): Response
     {

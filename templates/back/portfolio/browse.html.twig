@@ -12,7 +12,10 @@
                 <div class="card-body cards-body">
                     <h5 class="card-title">{{ portfolio.name }}</h5>
                     <p class="card-text">{{ portfolio.description }}</p>
-                    <a href="{{ path('portfolio_read_pictures', {'id': portfolio.id}) }}" class="btn btn-primary">Ouvrir</a>                    
+                    <a href="{{ path('portfolio_read_pictures', {'id': portfolio.id}) }}" class="btn btn-primary">Ouvrir</a> 
+                    <div class="change-buttons">
+                        {{ include('back/portfolio/_delete_form.html.twig') }}
+                    </div>                   
                 </div>
             </div>
         {% endfor %}

@@ -124,7 +124,7 @@ class PortfolioController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="portfolio_delete", methods={"POST"})
+     * @Route("/{id}", name="portfolio_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Portfolio $portfolio): Response
     {

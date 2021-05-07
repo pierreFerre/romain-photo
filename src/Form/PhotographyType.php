@@ -12,13 +12,15 @@ class PhotographyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
+            ->add('title', TextType::class, [
+                'label' => 'Nom',
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description'
+            ])
             ->add('textualAlternative')
             ->add('picture')
             ->add('thumbnail')
-            ->add('createdAt')
-            ->add('updatedAt')
             ->add('portfolio')
         ;
     }
