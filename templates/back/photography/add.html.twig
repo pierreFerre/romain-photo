@@ -1,11 +1,11 @@
 {% extends 'back/base.html.twig' %}
 
-{% block title %}New Photography{% endblock %}
+{% block title %}Nouvelle Photographie{% endblock %}
 
 {% block body %}
-    <h1>Create new Photography</h1>
+    <h1>Ajouter d'une photographie</h1>
 
     {{ include('back/photography/_form.html.twig') }}
 
-    <a href="{{ path('photography_browse') }}">back to list</a>
+    <a href="{{ path('photography_browse') }}">Retour à la collection</a>
 {% endblock %}

@@ -35,4 +35,16 @@ services:
         arguments:
             $targetDirectory: '%pictures_directory%'
 
+    App\EventListener\BiographyEntityListener:
+        tags:
+            -
+                name: 'doctrine.orm.entity_listener'
+                event: 'prePersist'
+                entity: 'App\Entity\Biography'
+                method: 'update'
+            -
+                name: 'doctrine.orm.entity_listener'
+                event: 'preUpdate'
+                entity: 'App\Entity\Biography'
+                method: 'update'
     

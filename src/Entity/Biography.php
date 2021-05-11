@@ -26,7 +26,7 @@ class Biography
      * @ORM\Column(type="text")
      */
     private $description;
-    
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,6 +37,11 @@ class Biography
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {

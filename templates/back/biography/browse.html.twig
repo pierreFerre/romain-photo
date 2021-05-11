@@ -1,0 +1,38 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    
+        
+    
+    
+    {% if not biographies %}
+        <h1>Biographie</h1>
+        <a class="btn btn-primary" href="{{ path('biography_add') }}">Ajouter une biographie</a>
+    {% else %}
+
+        {% for biography in biographies %}        
+
+            <div class="card text-center">
+                <div class="card-header">
+                    Biographie
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ biography.title }}</h5>
+                    <p class="card-text">{{ biography.description }}</p>
+                    <a href="{{ path('biography_edit', {'id': biography.id}) }}" class="btn btn-warning">Modifier</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {% if biography.updatedAt %}
+                        Biographie mise à jour le {{ biography.updatedAt|date('d-m-Y') }}
+                    {% else %}
+                        Biographie créée le {{ biography.createdAt|date('d-m-Y') }}
+                    {% endif %}
+                </div>
+            </div>
+            
+        {% endfor %}
+    {% endif %}
+    
+{% endblock %}

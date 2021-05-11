@@ -10,8 +10,8 @@
             <h5 class="card-title">{{ portfolio.name }}</h5>
             <p class="card-text">{{ portfolio.description }}</p>
             <p class="card-text"><small class="text-muted">Créé le {{ portfolio.createdAt ? portfolio.createdAt|date('Y-m-d H:i:s') : '' }}</small></p>
-            <a href="{{ path('portfolio_read', {'id': portfolio.id}) }}">Détail</a>
-            <a href="{{ path('portfolio_edit', {'id': portfolio.id}) }}">Modifier</a>
+            <a class="btn btn-primary" href="{{ path('portfolio_read', {'id': portfolio.id}) }}">Détails</a>
+            <a class="btn btn-warning" href="{{ path('portfolio_edit', {'id': portfolio.id}) }}">Modifier</a>
         </div>
     </div>
 
@@ -22,7 +22,7 @@
                 <div class="card-body cards-body">
                     <h5 class="card-title">{{ photography.title }}</h5>
                     <p class="card-text">{{ photography.description }}</p>
-                    <a href="{{ path('photography_read', {'id': photography.id}) }}" class="btn btn-primary">Ouvrir</a>
+                    <a href="{{ path('photography_read', {'id': photography.id}) }}" class="btn btn-primary">Détails</a>
                     <div class="change-buttons">
                         <a href="{{ path('photography_edit', {'id': photography.id}) }}" class="btn btn-warning">Modifier</a>
                         {{ include('back/photography/_delete_form.html.twig') }}
@@ -32,7 +32,7 @@
         {% endfor %}
     </div>
 
-    <a class="btn btn-primary" href="{{ path('photography_add') }}">Ajouter une photographie</a>
+    <a class="btn btn-primary" href="{{ path('photography_add', {'id': portfolio.id}) }}">Ajouter une photographie</a>
 
     
 {% endblock %}

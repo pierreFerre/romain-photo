@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Back;
 
 use App\Entity\Biography;
 use App\Form\BiographyType;
@@ -16,17 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class BiographyController extends AbstractController
 {
     /**
-     * @Route("/", name="biography_index", methods={"GET"})
+     * @Route("/", name="biography_browse", methods={"GET"})
      */
     public function index(BiographyRepository $biographyRepository): Response
     {
-        return $this->render('biography/index.html.twig', [
+        return $this->render('back/biography/browse.html.twig', [
             'biographies' => $biographyRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="biography_new", methods={"GET","POST"})
+     * @Route("/new", name="biography_add", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,10 +39,10 @@ class BiographyController extends AbstractController
             $entityManager->persist($biography);
             $entityManager->flush();
 
-            return $this->redirectToRoute('biography_index');
+            return $this->redirectToRoute('biography_browse');
         }
 
-        return $this->render('biography/new.html.twig', [
+        return $this->render('back/biography/add.html.twig', [
             'biography' => $biography,
             'form' => $form->createView(),
         ]);
@@ -59,17 +59,17 @@ class BiographyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('biography_index');
+            return $this->redirectToRoute('biography_browse');
         }
 
-        return $this->render('biography/edit.html.twig', [
+        return $this->render('back/biography/edit.html.twig', [
             'biography' => $biography,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="biography_delete", methods={"POST"})
+     * @Route("/{id}", name="biography_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Biography $biography): Response
     {
@@ -79,6 +79,6 @@ class BiographyController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('biography_index');
+        return $this->redirectToRoute('biography_browse');
     }
 }

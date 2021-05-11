@@ -1,6 +1,6 @@
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Portfolio{% endblock %}
+{% block title %}{{ portfolio.name }}{% endblock %}
 
 {% block body %}
     <h1>{{ portfolio.name }}</h1>
@@ -33,14 +33,14 @@
             </tr>
             <tr>
                 <th>UpdatedAt</th>
-                <td>{{ portfolio.updatedAt ? portfolio.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ portfolio.updatedAt ? portfolio.updatedAt|date('Y-m-d H:i:s') : '-' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('portfolio_browse') }}">back to list</a>
-
-    <a href="{{ path('portfolio_edit', {'id': portfolio.id}) }}">edit</a>
+    <a class="btn btn-warning" href="{{ path('portfolio_edit', {'id': portfolio.id}) }}">Modifier</a>
 
     {{ include('back/portfolio/_delete_form.html.twig') }}
+
+    <a href="{{ path('portfolio_read_pictures', {'id': portfolio.id}) }}">Retour à la collection</a>
 {% endblock %}
