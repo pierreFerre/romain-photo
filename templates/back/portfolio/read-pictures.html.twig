@@ -1,0 +1,38 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Romain Back Office - {{ portfolio.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ portfolio.name }}</h1>
+    <div class="card mb-3">
+    <img src="{{ asset(portfolio.picture) }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ portfolio.name }}</h5>
+            <p class="card-text">{{ portfolio.description }}</p>
+            <p class="card-text"><small class="text-muted">Créé le {{ portfolio.createdAt ? portfolio.createdAt|date('Y-m-d H:i:s') : '' }}</small></p>
+            <a class="btn btn-primary" href="{{ path('portfolio_read', {'id': portfolio.id}) }}">Détails</a>
+            <a class="btn btn-warning" href="{{ path('portfolio_edit', {'id': portfolio.id}) }}">Modifier</a>
+        </div>
+    </div>
+
+    <div class="photography-card row">
+        {% for photography in photographies %}
+            <div class="card col-4 cards">
+                <img class="card-img-top" src="{{ asset(photography.picture) }}" alt="Card image cap">
+                <div class="card-body cards-body">
+                    <h5 class="card-title">{{ photography.title }}</h5>
+                    <p class="card-text">{{ photography.description }}</p>
+                    <a href="{{ path('photography_read', {'id': photography.id}) }}" class="btn btn-primary">Détails</a>
+                    <div class="change-buttons">
+                        <a href="{{ path('photography_edit', {'id': photography.id}) }}" class="btn btn-warning">Modifier</a>
+                        {{ include('back/photography/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a class="btn btn-primary" href="{{ path('photography_add', {'id': portfolio.id}) }}">Ajouter une photographie</a>
+
+    
+{% endblock %}

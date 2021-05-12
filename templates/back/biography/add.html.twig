@@ -1,0 +1,11 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Romain Back Office - Biographie{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une biographie</h1>
+
+    {{ include('back/biography/_form.html.twig') }}
+
+    <a href="{{ path('biography_browse') }}">Retour</a>
+{% endblock %}
