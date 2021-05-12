@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/photography")
+ * @Route("/back/photography")
  */
 class PhotographyController extends AbstractController
 {
