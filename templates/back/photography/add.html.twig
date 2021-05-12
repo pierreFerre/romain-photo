@@ -1,11 +1,12 @@
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Nouvelle Photographie{% endblock %}
+{% block title %}Romain Back Office - Nouvelle Photographie{% endblock %}
 
 {% block body %}
     <h1>Ajouter d'une photographie</h1>
 
     {{ include('back/photography/_form.html.twig') }}
 
-    <a href="{{ path('photography_browse') }}">Retour à la collection</a>
+    {% set referer = app.request.server.get('HTTP_REFERER')|default('/') %}
+    <a href="{{ referer }}">Retour à la collection</a>
 {% endblock %}
