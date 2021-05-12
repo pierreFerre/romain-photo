@@ -57,7 +57,9 @@ class AppFixtures extends Fixture
             $photography->setPortfolio($randomPortfolio);
             $photography->setCreatedAt(new \Datetime());
 
-            $photography->setPicture(array_rand($pictures));
+            $pictureKey = array_rand($pictures);
+            $pictureName = 'assets/images/' . $pictures[$pictureKey];
+            $photography->setPicture($pictureName);
 
             $photographyList[] = $photography;
 

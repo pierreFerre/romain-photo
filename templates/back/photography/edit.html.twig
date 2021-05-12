@@ -1,13 +1,13 @@
 {% extends 'back/base.html.twig' %}
 
-{% block title %}Edit Photography{% endblock %}
+{% block title %}Romain Back Office - Modifier la Photographie{% endblock %}
 
 {% block body %}
-    <h1>Edit Photography</h1>
+    <h1>Modifier la photographie</h1>
 
-    {{ include('photography/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('back/photography/_form.html.twig', {'button_label': 'Valider'}) }}
 
-    <a href="{{ path('photography_index') }}">back to list</a>
+    {{ include('back/photography/_delete_form.html.twig') }}
 
-    {{ include('photography/_delete_form.html.twig') }}
+    <a href="{{ path('portfolio_read_pictures', {'id': photography.portfolio.id}) }}">Retour à la collection sans modifier</a>
 {% endblock %}

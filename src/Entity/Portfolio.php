@@ -57,6 +57,7 @@ class Portfolio
     public function __construct()
     {
         $this->photographies = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
