@@ -21,8 +21,14 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
             $contactFormData = $form->getData();
-            // dd($contactFormData);
+            // dd($contactFormData->getName());
 
             $message = (new \Swift_Message('Hello Email'))
                 ->setFrom($contactFormData->getEmail())
@@ -36,10 +42,6 @@ class ContactController extends AbstractController
             
     
             $mailer->send($message);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($contact);
-            $entityManager->flush();
 
 
             return $this->redirectToRoute('front_contact');
