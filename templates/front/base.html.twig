@@ -22,6 +22,7 @@
         {% endblock %}
     </head>
     <body>
+        {% set route_name = app.request.attributes.get('_route') %}
         <div class="front">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="{{ path('front_home')}}">Page d'accueil</a>
@@ -47,8 +48,8 @@
 
 
                     </div>
-                    <a class="nav-link" href="{{ path('front_biography_read') }}">Biographie</a>
-                    <a class="nav-link" href="{{ path('front_contact') }}">Contact</a>
+                    <a class="nav-link {% if route_name == "front_biography_read" %} active {% endif %}" href="{{ path('front_biography_read') }}">Biographie</a>
+                    <a class="nav-link {% if route_name == "front_contact" %} active {% endif %}" href="{{ path('front_contact') }}">Contact</a>
                     </div>
                 </div>
             </nav>        
@@ -57,6 +58,8 @@
             <div class="container-fluid container-lg">
                 
                 <div class="front-body">
+                    {% include 'flash_messages.html.twig' %}
+
                     {% block body %}{% endblock %}
                 </div>
             </div>

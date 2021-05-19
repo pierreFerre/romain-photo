@@ -39,7 +39,10 @@ class ContactController extends AbstractController
                 )
             ;
 
-            
+            $this->addFlash(
+                'secondary',
+                'Votre message a bien été envoyé.'
+            );
     
             $mailer->send($message);
 
