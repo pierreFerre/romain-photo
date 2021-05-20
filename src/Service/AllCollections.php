@@ -7,9 +7,14 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class AllCollections
 {
-  public function getCollections(PortfolioRepository $portfolioRepository)
+  public function __construct(PortfolioRepository $portfolioRepository)
+    {
+        $this->portfolioRepository = $portfolioRepository;
+    }
+
+  public function getCollections()
   {
-    $portfolios = $portfolioRepository->findAll();
+    $portfolios = $this->portfolioRepository->findAll();
 
     return $portfolios;
   }
