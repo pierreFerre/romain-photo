@@ -28,7 +28,6 @@ class ContactController extends AbstractController
             $entityManager->flush();
 
             $contactFormData = $form->getData();
-            // dd($contactFormData->getName());
 
             $message = (new \Swift_Message('Hello Email'))
                 ->setFrom($contactFormData->getEmail())
@@ -37,7 +36,23 @@ class ContactController extends AbstractController
                     $contactFormData->getMessage(),
                     'text/plain'
                 )
+                // ->setBody(
+                //     $this->renderView(
+                //         'front/contact/add.html.twig',
+                //         [
+                //             'name'    => $contactFormData->getName(),
+                //             'email'   => $contactFormData->getEmail(),
+                //             'message' => $contactFormData->getMessage(),
+                //         ]
+                //     ),
+                //     'text/html'
+                // )
             ;
+            //     ->setBody(
+            //         $contactFormData->getMessage(),
+            //         'text/plain'
+            //     )
+            // ;
 
             $this->addFlash(
                 'secondary',
@@ -45,6 +60,7 @@ class ContactController extends AbstractController
             );
     
             $mailer->send($message);
+            // $this->get('mailer')->send($message);
 
 
             return $this->redirectToRoute('front_contact');

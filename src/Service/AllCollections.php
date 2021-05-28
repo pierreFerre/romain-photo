@@ -14,8 +14,8 @@ class AllCollections
 
   public function getCollections()
   {
-    $portfolios = $this->portfolioRepository->findAll();
+    $albums = $this->portfolioRepository->findAll();
 
-    return $portfolios;
+    return $albums;
   }
 }

@@ -37,6 +37,11 @@ body {
   font-family: 'JetBrains Mono';
 }
 
+.logo {
+  font-size: 1.4em;
+  font-weight: 500;
+}
+
 @media (min-width: 576px) {
   .front {
     font-size: 1.3em;
@@ -50,5 +55,10 @@ body {
 @media (min-width: 992px) {
   .front {
     font-size: 1em;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;;
   }
 }

@@ -36,27 +36,19 @@
                             Collections
                         </a>
 
-                        {# ================= C'EST DE LA ===============#}
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-                                                
-                            {% for portfolio in portfolios.getCollections %}
-
-                                <a class="dropdown-item nav-link" href="{{ path('front_portfolio_read', {'id': portfolio.id})}}">{{ portfolio.name }}</a>
-                                {# {{ dump(portfolio) }} #}
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">                                                
+                            {% for album in albums.getCollections %}
+                                <a class="dropdown-item nav-link" href="{{ path('front_portfolio_read', {'id': album.id})}}">{{ album.name }}</a>
                             {% endfor %}
                         </div>
-                        {# ================= A DE LA ===============#}
-
 
                     </div>
                     <a class="nav-link {% if route_name == "front_biography_read" %} active {% endif %}" href="{{ path('front_biography_read') }}">Biographie</a>
                     <a class="nav-link {% if route_name == "front_contact" %} active {% endif %}" href="{{ path('front_contact') }}">Contact</a>
                     
-                    </div>
+                    
                 </div>
             </nav>        
-            {# {{ dump(portfolios) }}     #}
     
             <div class="container-fluid container-lg">
                 
