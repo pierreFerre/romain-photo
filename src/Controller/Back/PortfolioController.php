@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/collection")
+ * @Route("/back/collection")
  */
 class PortfolioController extends AbstractController
 {

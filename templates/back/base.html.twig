@@ -33,15 +33,11 @@
                             Collections
                         </a>
 
-                        {# ================= C'EST DE LA ===============#}
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                
-                            {% for portfolio in portfolios %}
-                                <li><a class="dropdown-item" href="{{ path('portfolio_read_pictures', {'id': portfolio.id})}}">{{ portfolio.name }}</a></li>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">                                                
+                            {% for album in albums %}
+                                <li><a class="dropdown-item" href="{{ path('portfolio_read_pictures', {'id': album.id})}}">{{ album.name }}</a></li>
                             {% endfor %}
                         </div>
-                        {# ================= A DE LA ===============#}
-
 
                     </div>
                     <li class="nav-item">
