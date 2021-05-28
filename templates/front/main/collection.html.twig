@@ -1,0 +1,16 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Romain Godard - Collection{% endblock %}
+
+{% block body %}
+
+
+<h1>{{ portfolio.name }}</h1>
+
+{% for photography in photographies %}
+
+<img class="card-img-top" src="{{ asset(photography.picture) }}" alt="Card image cap">
+
+{% endfor %}
+
+{% endblock %}

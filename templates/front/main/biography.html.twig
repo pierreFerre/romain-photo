@@ -1,0 +1,16 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Romain Godard - Biographie{% endblock %}
+
+{% block body %}
+
+
+{% for biography in biographies %}
+
+<h1>{{ biography.title }}</h1>
+
+<p>{{ biography.description }}</p>
+
+{% endfor %}
+
+{% endblock %}
