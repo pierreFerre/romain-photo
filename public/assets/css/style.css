@@ -42,6 +42,12 @@ body {
   font-weight: 500;
 }
 
+.photo {
+  
+}
+
+
+
 @media (min-width: 576px) {
   .front {
     font-size: 1.3em;
@@ -61,4 +67,46 @@ body {
     display: flex;
     justify-content: space-between;;
   }
+
+  .insta-logo {
+    top: 0.25em;
+    position: relative;
+    left: 1em;
+  }
+
+  .portfolio-picture {
+    position: relative;
+    margin-bottom: 2em;
+  }
+  
+  .shade {
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.3s;
+    color: rgba(128, 128, 128, 0);
+    /* background: rgba(128, 128, 128, 0.81); */
+    /* box-shadow: 0px -13px 22px 11px rgb(128, 128, 128, 0.81), 0px 13px 22px 11px rgb(128, 128, 128, 0.81); */
+    /* color: rgb(25, 25, 25, 0.77); */
+  }
+
+  .shade:hover {
+    background: rgba(128, 128, 128, 0.81);
+    /* box-shadow: -2px -13px 22px 11px rgb(128, 128, 128, 0.81), 2px 13px 22px 11px rgb(128, 128, 128, 0.81); */
+    color: rgb(25, 25, 25, 0.77);
+    box-shadow: 0px 0px 8px 5px rgba(128, 128, 128, 0.6);
+    /* border: 1px solid rgb(128, 128, 128, 0.81); */
+  }
+  
+  
+  }
+  
 }

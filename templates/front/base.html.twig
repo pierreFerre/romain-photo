@@ -25,7 +25,7 @@
         {% set route_name = app.request.attributes.get('_route') %}
         <div class="front">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="{{ path('front_home')}}">Page d'accueil</a>
+                <a class="navbar-brand" href="{{ path('front_home')}}">Accueil</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -45,6 +45,8 @@
                     </div>
                     <a class="nav-link {% if route_name == "front_biography_read" %} active {% endif %}" href="{{ path('front_biography_read') }}">Biographie</a>
                     <a class="nav-link {% if route_name == "front_contact" %} active {% endif %}" href="{{ path('front_contact') }}">Contact</a>
+
+                    <a class="insta-logo" href="https://www.instagram.com/romain_114/"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
                     
                     
                 </div>
