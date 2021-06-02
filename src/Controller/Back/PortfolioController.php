@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/back/collection")
+ * @Route("/back/portfolio")
  */
 class PortfolioController extends AbstractController
 {
@@ -24,7 +24,6 @@ class PortfolioController extends AbstractController
      */
     public function browse(PortfolioRepository $portfolioRepository): Response
     {        
-        // dd($portfolioRepository->findAll());
         return $this->render('back/portfolio/browse.html.twig', [
             'portfolios' => $portfolioRepository->findAll(),
         ]);
@@ -51,9 +50,11 @@ class PortfolioController extends AbstractController
                 $portfolio->setPicture($newPicture);
             }
 
+            // We send it to the database
             $entityManager->persist($portfolio);
             $entityManager->flush();
 
+            // And a flashmessage is sent to the redirected page
             $this->addFlash(
                 'success',
                 'Création du portfolio "' . $portfolio->getName() . '" effectuée.'
@@ -76,7 +77,7 @@ class PortfolioController extends AbstractController
     public function read(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
     {
         $photographies = $photographyRepository->findBy(['portfolio' => $portfolio]);
-        // dd($photographies);
+        
         return $this->render('back/portfolio/read.html.twig', [
             'portfolio' => $portfolio,
             'photographies' => $photographies,
@@ -91,7 +92,7 @@ class PortfolioController extends AbstractController
     public function readPictures(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
     {
         $photographies = $photographyRepository->findBy(['portfolio' => $portfolio]);
-        // dd($photographies);
+        
         return $this->render('back/portfolio/read-pictures.html.twig', [
             'portfolio' => $portfolio,
             'photographies' => $photographies,

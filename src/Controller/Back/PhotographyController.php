@@ -17,6 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PhotographyController extends AbstractController
 {
     /**
+     * Borwse all the photographies, not used (just for testing)
+     * 
      * @Route("/", name="photography_browse", methods={"GET"})
      */
     public function browse(PhotographyRepository $photographyRepository): Response
@@ -27,6 +29,8 @@ class PhotographyController extends AbstractController
     }
 
     /**
+     * Add a new photography to a portfolio
+     * 
      * @Route("/new", name="photography_add", methods={"GET","POST"})
      */
     public function add(Request $request, FileUploader $fileUploader): Response
@@ -71,6 +75,8 @@ class PhotographyController extends AbstractController
     }
 
     /**
+     * Read a photography's details
+     * 
      * @Route("/{id}", name="photography_read", methods={"GET"})
      */
     public function show(Photography $photography): Response
@@ -81,6 +87,8 @@ class PhotographyController extends AbstractController
     }
 
     /**
+     * Edit a photography's details
+     * 
      * @Route("/{id}/edit", name="photography_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Photography $photography, FileUploader $fileUploader): Response
@@ -121,11 +129,12 @@ class PhotographyController extends AbstractController
     }
 
     /**
+     * Delete a photography
+     * 
      * @Route("/{id}", name="photography_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Photography $photography): Response
     {
-        // dd($photography->getPortfolio()->get);
         $portfolio = $photography->getPortfolio();
 
         if ($this->isCsrfTokenValid('delete'.$photography->getId(), $request->request->get('_token'))) {
@@ -137,8 +146,7 @@ class PhotographyController extends AbstractController
                 'success',
                 'La photo "' . $photography->getTitle() . '" a bien été supprimée.'
             );
-        }
-        
+        }        
 
         return $this->redirectToRoute('portfolio_read_pictures', [
             'id' => $portfolio->getId()

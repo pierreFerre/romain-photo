@@ -12,6 +12,7 @@ class AllCollections
         $this->portfolioRepository = $portfolioRepository;
     }
 
+  // Get all of the existent portfolios
   public function getCollections()
   {
     $albums = $this->portfolioRepository->findAll();

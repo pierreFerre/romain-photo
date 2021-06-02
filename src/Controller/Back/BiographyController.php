@@ -16,6 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class BiographyController extends AbstractController
 {
     /**
+     * Browse the biography
+     * 
      * @Route("/", name="biography_browse", methods={"GET"})
      */
     public function index(BiographyRepository $biographyRepository): Response
@@ -26,6 +28,8 @@ class BiographyController extends AbstractController
     }
 
     /**
+     * Add a biography (only accessible if there's not already one)
+     * 
      * @Route("/new", name="biography_add", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -49,6 +53,7 @@ class BiographyController extends AbstractController
     }
 
     /**
+     * Modify the biography (only accessible if there's one)
      * @Route("/{id}/edit", name="biography_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Biography $biography): Response
@@ -69,6 +74,7 @@ class BiographyController extends AbstractController
     }
 
     /**
+     * Delete the biography (only accessible if there's one)
      * @Route("/{id}", name="biography_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Biography $biography): Response
