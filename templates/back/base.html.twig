@@ -34,7 +34,7 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">                                                
-                            {% for album in albums %}
+                            {% for album in albums.getCollections %}
                                 <li><a class="dropdown-item" href="{{ path('portfolio_read_pictures', {'id': album.id})}}">{{ album.name }}</a></li>
                             {% endfor %}
                         </div>

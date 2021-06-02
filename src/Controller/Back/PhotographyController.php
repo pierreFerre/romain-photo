@@ -36,14 +36,21 @@ class PhotographyController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
+
             // Handling the picture
             $picture = $form->get('picture')->getData();
+            
+            // Handling the portfolio
+            $portfolio = $form->get('portfolio')->getData();
+
             // If a picture has been send
             if ($picture) {
                 $newPicture = $fileUploader->upload($picture);
                 $photography->setPicture($newPicture);
             }
+            
             $entityManager->persist($photography);
             $entityManager->flush();
 
@@ -52,7 +59,9 @@ class PhotographyController extends AbstractController
                 'Ajout de la photo "' . $photography->getTitle() . '" effectué.'
             );
 
-            return $this->redirectToRoute('photography_browse');
+            return $this->redirectToRoute('portfolio_read_pictures', [
+                'id' => $portfolio->getId()
+            ]);
         }
 
         return $this->render('back/photography/add.html.twig', [
@@ -83,6 +92,10 @@ class PhotographyController extends AbstractController
 
             // Handling the picture
             $picture = $form->get('picture')->getData();
+
+            // Handling the portfolio
+            $portfolio = $form->get('portfolio')->getData();
+
             // If a picture has been send
             if ($picture) {
                 $newPicture = $fileUploader->upload($picture);
@@ -96,7 +109,9 @@ class PhotographyController extends AbstractController
                 'Modification de la photo "' . $photography->getTitle() . '" effectuée.'
             );
 
-            return $this->redirectToRoute('photography_browse');
+            return $this->redirectToRoute('portfolio_read_pictures', [
+                'id' => $portfolio->getId()
+            ]);
         }
 
         return $this->render('back/photography/edit.html.twig', [
@@ -110,12 +125,23 @@ class PhotographyController extends AbstractController
      */
     public function delete(Request $request, Photography $photography): Response
     {
+        // dd($photography->getPortfolio()->get);
+        $portfolio = $photography->getPortfolio();
+
         if ($this->isCsrfTokenValid('delete'.$photography->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($photography);
             $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('photography_browse');
+            $this->addFlash(
+                'success',
+                'La photo "' . $photography->getTitle() . '" a bien été supprimée.'
+            );
+        }
+        
+
+        return $this->redirectToRoute('portfolio_read_pictures', [
+            'id' => $portfolio->getId()
+        ]);
     }
 }

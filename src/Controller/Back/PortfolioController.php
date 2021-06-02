@@ -18,7 +18,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PortfolioController extends AbstractController
 {
     /**
-     * Read all
+     * Browse all portfolios
+     * 
      * @Route("/", name="portfolio_browse", methods={"GET"})
      */
     public function browse(PortfolioRepository $portfolioRepository): Response
@@ -30,6 +31,8 @@ class PortfolioController extends AbstractController
     }
 
     /**
+     * Add a new portfolio
+     * 
      * @Route("/new", name="portfolio_add", methods={"GET","POST"})
      */
     public function add(Request $request, FileUploader $fileUploader): Response
@@ -66,6 +69,8 @@ class PortfolioController extends AbstractController
     }
 
     /**
+     * Open portfolio's details
+     * 
      * @Route("/{id}", name="portfolio_read", methods={"GET"})
      */
     public function read(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
@@ -79,6 +84,8 @@ class PortfolioController extends AbstractController
     }
 
     /**
+     * Open one particular portfolio and show its photos
+     * 
      * @Route("/see/{id}", name="portfolio_read_pictures", methods={"GET"})
      */
     public function readPictures(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
@@ -92,6 +99,8 @@ class PortfolioController extends AbstractController
     }
 
     /**
+     * Modify a portfolio
+     * 
      * @Route("/{id}/edit", name="portfolio_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Portfolio $portfolio, FileUploader $fileUploader): Response
@@ -126,6 +135,8 @@ class PortfolioController extends AbstractController
     }
 
     /**
+     * Delete a portfolio_browse
+     * 
      * @Route("/{id}", name="portfolio_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Portfolio $portfolio): Response
