@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -26,6 +27,11 @@ class User
      * @ORM\Column(type="string", length=50)
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $roles;
 
     public function getId(): ?int
     {
@@ -54,5 +60,37 @@ class User
         $this->password = $password;
 
         return $this;
+    }
+
+    public function getRoles(): ?int
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(int $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
