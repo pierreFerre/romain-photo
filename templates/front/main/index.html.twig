@@ -14,7 +14,6 @@
 <h2>Les collections</h2>
 
 {% for portfolio in portfolios %}
-
   <a href="{{ path('front_portfolio_read', {'id': portfolio.id}) }}" >
     <div class="portfolio-picture">
       <img class="card-img-top photo" src="{{ asset(portfolio.picture) }}" alt="Card image cap">
