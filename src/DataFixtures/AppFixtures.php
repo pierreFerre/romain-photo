@@ -28,19 +28,6 @@ class AppFixtures extends Fixture
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        // PORTFOLIOS
-        // Array to store the portfolios
-        $portfolioList = [];
-        for ($i = 1; $i <= self::NB_PORTFOLIOS; $i++) {
-            $portfolio = new Portfolio();
-            $portfolio->setName('Portfolio' . $i);
-            $portfolio->setCreatedAt(new \Datetime());
-            $portfolioList[] = $portfolio;
-
-            $manager->persist($portfolio);
-        }
-
-        // PHOTOGRAPHIES
         // Directory containing the files
         $pictureDir = '/var/www/html/romain-photo/public/assets/images';  
         // Array containing the free pictures for testing
@@ -55,6 +42,24 @@ class AppFixtures extends Fixture
             }
         }
 
+        // PORTFOLIOS
+        // Array to store the portfolios
+        $portfolioList = [];
+        for ($i = 1; $i <= self::NB_PORTFOLIOS; $i++) {
+            $portfolio = new Portfolio();
+            $portfolio->setName('Portfolio' . $i);
+            $portfolio->setCreatedAt(new \Datetime());
+
+            $pictureKey = array_rand($pictures);
+            $pictureName = 'assets/images/' . $pictures[$pictureKey];
+            $portfolio->setPicture($pictureName);
+
+            $portfolioList[] = $portfolio;
+
+            $manager->persist($portfolio);
+        }
+
+        // PHOTOGRAPHIES
         // Array to store the photographies
         $photographyList = [];
 
