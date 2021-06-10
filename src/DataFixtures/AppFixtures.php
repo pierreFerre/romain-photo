@@ -4,16 +4,25 @@ namespace App\DataFixtures;
 
 use Faker;
 use Faker\Factory;
+use App\Entity\User;
 use App\Entity\Biography;
 use App\Entity\Portfolio;
 use App\Entity\Photography;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
     const NB_PORTFOLIOS = 3;
     const NB_PHOTOS = 10 * self::NB_PORTFOLIOS;
+    
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
 
     public function load(ObjectManager $manager)
     {
@@ -71,9 +80,19 @@ class AppFixtures extends Fixture
             $manager->persist($photography);
         }
 
+        // BIOGRAPHY
         $biography = new Biography();
         $biography->setDescription($faker->paragraphs(2, true));
         $manager->persist($biography);
+
+        // ADMIN
+        $admin = new User();
+        $password = 'romain';
+        $encodedPassword = $this->encoder->encodePassword($admin, $password);
+        $admin->setUsername('Romain')
+            ->setPassword($encodedPassword)
+            ->setRoles(["ROLE_ADMIN"]);
+        $manager->persist($admin);
 
         $manager->flush();
     }
