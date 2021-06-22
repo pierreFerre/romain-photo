@@ -46,6 +46,10 @@ body {
   
 }
 
+.bio-text {
+  white-space: pre-wrap;
+}
+
 
 
 @media (min-width: 576px) {
