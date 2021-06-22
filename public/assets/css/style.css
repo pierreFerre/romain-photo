@@ -47,7 +47,7 @@ body {
 }
 
 .bio-text {
-  white-space: pre-wrap;
+  white-space: pre-wrap; 
 }
 
 
@@ -111,6 +111,6 @@ body {
   }
   
   
-  }
+  
   
 }
