@@ -109,7 +109,7 @@ class ContactController extends AbstractController
                             'message' => $contactFormData->getMessage()
                         ]
                     ),
-                    'text/html'
+                    'text/plain'
                 );
                 $mailer->send($email);
 
