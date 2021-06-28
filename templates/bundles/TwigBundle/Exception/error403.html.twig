@@ -1,0 +1,14 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Romain Godard - Utilisateur non autorisé{% endblock %}
+
+{% block body %}
+
+<h1>Utilisateur non autorisé</h1>
+
+<p>Vos identifiants sont incorrects ou bien vous n'avez pas accès à cette partie du site.</p>
+
+<a href="{{ path('app_login') }}">Retour à l'identification</a>
+
+
+{% endblock %}
