@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
-    
+
     // public function index(Request $request, \Swift_Mailer $mailer): Response
     // {
     //     $contact = new Contact();
@@ -21,7 +21,7 @@ class ContactController extends AbstractController
     //     $form->handleRequest($request);
 
     //     if ($form->isSubmitted() && $form->isValid()) {
-            
+
 
     //         $entityManager = $this->getDoctrine()->getManager();
     //         $entityManager->persist($contact);
@@ -58,7 +58,7 @@ class ContactController extends AbstractController
     //             'secondary',
     //             'Votre message a bien été envoyé.'
     //         );
-    
+
     //         $mailer->send($message);
     //         // $this->get('mailer')->send($message);
 
@@ -75,43 +75,50 @@ class ContactController extends AbstractController
     /**
      * @Route("/front/contact", name="front_contact", methods={"GET","POST"})
      * @param Request $request
-     * @param MailerInterface $mailer
+     * @param \Swift_Mailer $mailer
      * @return Response
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
-    public function index(Request $request, MailerInterface $mailer): Response
+    public function index(Request $request, \Swift_Mailer $mailer): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contact);
             $entityManager->flush();
 
             $contactFormData = $form->getData();
 
-
-             //$this->get('mailer')->send($message);
-            $email = (new Email())
-                ->from($contactFormData->getEmail())
-                ->to('pedr1ferre@gmail.com')
+            $email = (new \Swift_Message('Contact depuis romaingodard.fr'))
+                ->setFrom($contactFormData->getEmail())
+                ->setTo('pedr1ferre@gmail.com')
                 //->cc('cc@example.com')
                 //->bcc('bcc@example.com')
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
-                ->subject('Time for Symfony Mailer!')
-                ->text($contactFormData->getMessage())
-                ->html($contactFormData->getMessage());
+                // ->subject('Time for Symfony Mailer!')
+                ->setBody(
+                    $this->renderView(
+                        'front/contact/contact-mail.txt.twig',
+                        [
+                            'name' => $contactFormData->getName(),
+                            'message' => $contactFormData->getMessage()
+                        ]
+                    ),
+                    'text/html'
+                );
+                $mailer->send($email);
 
             $this->addFlash(
                 'secondary',
                 'Votre message a bien été envoyé.'
             );
 
-            $mailer->send($email);
+            
             return $this->redirectToRoute('front_contact');
         }
 
@@ -131,7 +138,7 @@ class ContactController extends AbstractController
     //     $form->handleRequest($request);
 
     //     if ($form->isSubmitted() && $form->isValid()) {
-            
+
 
     //         $entityManager = $this->getDoctrine()->getManager();
     //         $entityManager->persist($contact);
@@ -148,11 +155,11 @@ class ContactController extends AbstractController
     //             )
     //         ;
 
-            // $this->addFlash(
-            //     'secondary',
-            //     'Votre message a bien été envoyé.'
-            // );
-    
+    // $this->addFlash(
+    //     'secondary',
+    //     'Votre message a bien été envoyé.'
+    // );
+
     //         $mailer->send($message);
 
 
