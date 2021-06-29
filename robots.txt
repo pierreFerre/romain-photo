@@ -1,0 +1,3 @@
+User-Agent: *
+Disallow: /login
+Sitemap: http://www.adressedevotresite.com/sitemap.xml 
