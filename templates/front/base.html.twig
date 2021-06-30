@@ -23,7 +23,7 @@
     </head>
     <body>
         {% set route_name = app.request.attributes.get('_route') %}
-        <body class="front">
+        <div class="front">
             <header>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="{{ path('front_home')}}">Accueil</a>
@@ -68,10 +68,10 @@
                 <p class="copyright">
                     &copy; Copyright 2021. Tous droits réservés, reproduction interdite
                 </p>
-                <p><a href="">Plan du site</a></p>
+                <p><a class="sitemap" href="{{ path('front_sitemap') }}">Plan du site</a></p>
             </footer>
 
-        </body>
+        </div>
 
         
 

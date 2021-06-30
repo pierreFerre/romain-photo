@@ -1,0 +1,31 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Romain Godard - Plan du site{% endblock %}
+
+{% block body %}
+
+
+<h1>Plan du site</h1>
+
+
+<ul>
+  <li><a href="{{ path('front_home') }}">Accueil</li>
+  <ul>    
+      {% for album in albums.getCollections %}
+      <li>
+        <a href="{{ path('front_portfolio_read', {'id': album.id})}}" >    
+          <p>
+            {{ album.name }}
+          </p>
+        </a>
+      </li>
+      {% endfor %}    
+  </ul>
+
+  <li><a href="{{ path('front_biography_read') }}">Biographie</a></li>
+  <li><a href="{{ path('front_contact') }}">Contact</a></li>
+</ul>
+
+
+
+{% endblock %}

@@ -43,4 +43,12 @@ class MainController extends AbstractController
             'biographies' => $biographyRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/sitemap", name="front_sitemap")
+     */
+    public function sitemap()
+    {
+        return $this->render('front/sitemap/sitemap.html.twig');
+    }
 }
