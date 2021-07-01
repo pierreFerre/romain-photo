@@ -17,7 +17,8 @@
 
 .photography-card {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .cards {
@@ -112,6 +113,10 @@ footer {
   .copyright {
     font-size: 0.4em;
   }
+
+  .cards {
+    max-width: 80%;
+  }
 }
 
 @media (min-width: 992px) {
@@ -133,6 +138,10 @@ footer {
   .portfolio-picture {
     position: relative;
     margin-bottom: 5em;
+  }
+
+  .cards {
+    max-width: 30%;
   }
   
   .shade {
