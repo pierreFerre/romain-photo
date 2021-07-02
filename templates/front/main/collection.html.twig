@@ -7,8 +7,6 @@
 
 <h1>{{ portfolio.name }}</h1>
 
-{{ dump(photographies) }}
-
 {% for photography in photographies %}
 
 <img class="card-img-top photo" src="{{ asset(photography.picture) }}" alt="Card image cap">
