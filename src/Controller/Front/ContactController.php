@@ -36,7 +36,7 @@ class ContactController extends AbstractController
 
             $email = (new \Swift_Message('Contact depuis romaingodard.fr'))
                 ->setFrom($contactFormData->getEmail())
-                ->setTo('pedr1ferre@gmail.com')
+                ->setTo('priam33@gmail.com')
                 //->cc('cc@example.com')
                 //->bcc('bcc@example.com')
                 //->replyTo('fabien@example.com')

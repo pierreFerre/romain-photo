@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\PhotographyRepository;
+use App\Entity\Portfolio;
+use Symfony\Component\Validator\Constraints AS Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PhotographyRepository;
 
 /**
  * @ORM\Entity(repositoryClass=PhotographyRepository::class)
@@ -56,6 +58,12 @@ class Photography
      * @ORM\ManyToOne(targetEntity=Portfolio::class, inversedBy="photographies")
      */
     private $portfolio;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive
+     */
+    private $imgOrder;
 
     public function __construct()
     {
@@ -159,6 +167,18 @@ class Photography
     public function setPortfolio(?Portfolio $portfolio): self
     {
         $this->portfolio = $portfolio;
+
+        return $this;
+    }
+
+    public function getImgOrder(): ?int
+    {
+        return $this->imgOrder;
+    }
+
+    public function setImgOrder(?int $imgOrder): self
+    {
+        $this->imgOrder = $imgOrder;
 
         return $this;
     }

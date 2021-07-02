@@ -12,7 +12,7 @@
                 <td>{{ photography.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ photography.title }}</td>
             </tr>
             <tr>
@@ -20,23 +20,23 @@
                 <td>{{ photography.description }}</td>
             </tr>
             <tr>
-                <th>TextualAlternative</th>
+                <th>Description textuelle</th>
                 <td>{{ photography.textualAlternative }}</td>
             </tr>
             <tr>
-                <th>Picture</th>
+                <th>Emplacement</th>
                 <td>{{ photography.picture }}</td>
             </tr>
             <tr>
-                <th>Thumbnail</th>
-                <td>{{ photography.thumbnail }}</td>
+                <th>Ordre d'apparition</th>
+                <td>{{ photography.imgOrder }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Date de création</th>
                 <td>{{ photography.createdAt ? photography.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
+                <th>Date de modification</th>
                 <td>{{ photography.updatedAt ? photography.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>

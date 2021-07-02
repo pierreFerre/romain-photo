@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PhotographyType extends AbstractType
@@ -69,16 +71,24 @@ class PhotographyType extends AbstractType
             ->add('textualAlternative', TextType::class, [
                 'label' => 'Description alternative',
             ])
-            ->add('portfolio', EntityType::class, [
-                'label' => 'Collection',
-                'class' => Portfolio::class,
-                'choice_label' => 'name',
-                'query_builder' => function (PortfolioRepository $pr) {
-                    return $pr->createQueryBuilder('p')
-                        ->orderBy('p.name', 'ASC');
-                },
-                'multiple' => false,
-                'expanded' => false,
+            // ->add('portfolio', EntityType::class, [
+            //     'label' => 'Collection',
+            //     'class' => Portfolio::class,
+            //     'choice_label' => 'name',
+            //     'query_builder' => function (PortfolioRepository $pr) {
+            //         return $pr->createQueryBuilder('p')
+            //             ->orderBy('p.name', 'ASC');
+            //     },
+            //     'multiple' => false,
+            //     'expanded' => false,
+            // ])
+            ->add('imgOrder', IntegerType::class, [
+                'label' => 'Ordre d\'apparition',
+                'error_bubbling' => true,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 20
+                ]
             ])
             // ->add('portfolio')
         ;

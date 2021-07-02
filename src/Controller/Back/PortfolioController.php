@@ -91,7 +91,7 @@ class PortfolioController extends AbstractController
      */
     public function readPictures(Portfolio $portfolio = null, PhotographyRepository $photographyRepository): Response
     {
-        $photographies = $photographyRepository->findBy(['portfolio' => $portfolio]);
+        $photographies = $photographyRepository->findBy(['portfolio' => $portfolio], $orderBy = array ('imgOrder' => 'ASC'));
         
         return $this->render('back/portfolio/read-pictures.html.twig', [
             'portfolio' => $portfolio,

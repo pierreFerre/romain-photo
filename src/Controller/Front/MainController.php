@@ -27,7 +27,7 @@ class MainController extends AbstractController
      */
     public function portfolio(Portfolio $portfolio = null, PhotographyRepository $photographyRepository)
     {
-        $photographies = $photographyRepository->findBy(['portfolio' => $portfolio]);
+        $photographies = $photographyRepository->findBy(['portfolio' => $portfolio], $orderBy = array ('imgOrder' => 'ASC'));
         return $this->render('front/main/collection.html.twig', [
             'portfolio' => $portfolio,
             'photographies' => $photographies,

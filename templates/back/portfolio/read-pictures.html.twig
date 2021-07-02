@@ -32,7 +32,9 @@
         {% endfor %}
     </div>
 
-    <a class="btn btn-primary" href="{{ path('photography_add', {'id': portfolio.id}) }}">Ajouter une photographie</a>
+    <div class="bottom-button">
+        <a class="btn btn-primary" href="{{ path('photography_add', {'id': portfolio.id}) }}">Ajouter une photographie</a>
+    </div>
 
     
 {% endblock %}
