@@ -87,8 +87,7 @@ class AppFixtures extends Fixture
 
         // ADMIN
         $admin = new User();
-        $password = 'romain';
-        $encodedPassword = $this->encoder->encodePassword($admin, $password);
+        $encodedPassword = $this->encoder->encodePassword($admin, 'romain');
         $admin->setUsername('Romain')
             ->setPassword($encodedPassword)
             ->setRoles(["ROLE_ADMIN"]);

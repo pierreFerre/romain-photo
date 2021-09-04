@@ -5,11 +5,12 @@
 {% block body %}
 
 
-<h1>{{ portfolio.name }}</h1>
+<h1 class="collection-name">{{ portfolio.name }}</h1>
 
 {% for photography in photographies %}
 
 <img class="card-img-top photo" src="{{ asset(photography.picture) }}" alt="Card image cap">
+<figcaption>{{ photography.title }}</figcaption>
 
 {% endfor %}
 
